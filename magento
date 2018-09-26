@@ -1,0 +1,23 @@
+upstream fastcgi_backend {
+    server  unix:/run/php/php7.1-fpm.sock;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name THIS_IS_GOING_TO_BE_REPLACED;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name THIS_IS_GOING_TO_BE_REPLACED;
+
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/THIS_IS_GOING_TO_BE_REPLACED/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/THIS_IS_GOING_TO_BE_REPLACED/privkey.pem;
+
+    set $MAGE_ROOT /var/www/magento;
+    set $MAGE_MODE developer;
+    include /var/www/magento/nginx.conf.sample;
+}
