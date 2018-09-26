@@ -17,7 +17,7 @@ server {
     ssl_certificate /etc/letsencrypt/live/THIS_IS_GOING_TO_BE_REPLACED/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/THIS_IS_GOING_TO_BE_REPLACED/privkey.pem;
 
-    set $MAGE_ROOT /var/www/magento;
+    set $MAGE_ROOT /var/www/html/magento;
     set $MAGE_MODE developer;
-    include /var/www/magento/nginx.conf.sample;
+    include /var/www/html/magento/nginx.conf.sample;
 }
